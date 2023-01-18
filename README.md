@@ -2,4 +2,4 @@
 
 ## Biblioteca contine obiecte de sincronizare, precum mutex, semaphore si rwlock
 
-## Dezvoltat impreuna cu https://github.com/trifangrobert/
+## Dezvoltat impreuna cu [Robert Trifan](https://github.com/trifangrobert/)
