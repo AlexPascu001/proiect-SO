@@ -7,8 +7,8 @@ int shared_variable = 0;
 
 const int iterations = 5;
 
-atomic_int rds;
 atomic_int rwlock;
+atomic_int rds;
 
 void *reader_thread(void *v) {
     int id = *(int *)v;

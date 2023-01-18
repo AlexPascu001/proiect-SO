@@ -1,4 +1,5 @@
 #include <stdatomic.h>
+#include "mutex.h"
 
 void init_mutex(atomic_int *mutex) {
     atomic_init(mutex, 0);

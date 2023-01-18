@@ -6,32 +6,32 @@
 #include <time.h>
  
 atomic_int rwlock;
-atomic_int readers;
+atomic_int rds;
  
 void *reader_thread(void *arg) {
     int id = *(int *)arg;
     printf("Reader %d: Trying to acquire read lock\n", id);
-    rwlock_rdlock(&rwlock, &readers);
+    rwlock_rdlock(&rwlock, &rds);
     printf("Reader %d: Read lock acquired\n", id);
     sleep(1);
-    printf("Reader %d: Releasing read lock\n", id);
-    rwlock_unlock(&rwlock, &readers);
-    return NULL;
+    printf("Reader %d stopped reading\n", id);
+    rwlock_unlock(&rwlock, &rds);
+    return NULL;	
 }
  
 void *writer_thread(void *arg) {
     int id = *(int *)arg;
     printf("Writer %d: Trying to acquire write lock\n", id);
-    rwlock_wrlock(&rwlock, &readers);
+    rwlock_wrlock(&rwlock, &rds);
     printf("Writer %d: Write lock acquired\n", id);
     sleep(1);
-    printf("Writer %d: Releasing write lock\n", id);
-    rwlock_unlock(&rwlock, &readers);
+    printf("Writer %d stopped writing\n", id);
+    rwlock_unlock(&rwlock, &rds);
     return NULL;
 }
  
 int main(int argc, char *argv[]) {
-    init_rwlock(&rwlock, &readers);
+    init_rwlock(&rwlock, &rds);
     if (argc != 3) {
         printf("Numar invalid de arg.\n");
         return errno;
